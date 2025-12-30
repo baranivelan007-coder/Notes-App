@@ -125,8 +125,8 @@ export default function MainPage() {
                 {/* Right Side */}
                 <div className="flex items-center gap-2">
                     <button onClick={() => setShowPopup(true)} className="rounded-md p-1 hover:bg-slate-700/30"><img className="w-6.5 h-6.5" src={logo2} alt="Add" /></button>
-                    { username && <span className="ml-4 text-slate-300">Hello, {username}</span> }
-                    <button onClick={logout} className="ml-4 px-3 py-1.5 border border-slate-700 rounded-md hover:bg-slate-700/30">Logout</button>
+                    { username && <span className="text-slate-300">Hello, {username}</span> }
+                    <button onClick={logout} className="px-3 py-1.5 border border-slate-700 rounded-md hover:bg-slate-700/30">Logout</button>
                 </div>
             </div>
             {/* Popup form */}
