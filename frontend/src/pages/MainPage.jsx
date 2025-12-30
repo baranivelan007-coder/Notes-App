@@ -37,7 +37,7 @@ export default function MainPage() {
                 const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notes`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setNotes(prev => [res.data, ...prev] || []);
+                setNotes(res.data || []);
             } catch (err) {
                 setError("Failed to fetch notes");
             } finally {
@@ -76,7 +76,7 @@ export default function MainPage() {
                     { title, content },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
-                setNotes((prev) => [res.data, ...prev]);
+                setNotes((prev) => [...prev, res.data]);
             }
             setShowPopup(false);
             setTitle("");
