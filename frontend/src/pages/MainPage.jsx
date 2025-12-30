@@ -150,7 +150,7 @@ export default function MainPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                         {notes.map((note) => (
-                            <div key={note._id} className="flex flex-col justify-between bg-slate-800 border border-slate-700 rounded-md p-4">
+                            <div key={note._id} className="bg-slate-800 border border-slate-700 rounded-md p-4">
                                 <h3 className="font-bold text-lg text-slate-100">{note.title}</h3>
                                 <p className="text-slate-300 mt-2">{note.content}</p>
                                 <p className="text-slate-400 text-sm mt-4">{new Date(note.date).toLocaleDateString()}</p>
