@@ -32,20 +32,18 @@ export default function MainPage() {
                 navigate("/login");
                 return;
             }
-
             setLoading(true);
             try {
                 const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notes`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
-                setNotes(res.data || []);
+                setNotes(prev => [res.data, ...prev] || []);
             } catch (err) {
                 setError("Failed to fetch notes");
             } finally {
                 setLoading(false);
             }
         };
-
         loadNotes();
     }, [navigate]);
 
@@ -57,12 +55,10 @@ export default function MainPage() {
             navigate("/login");
             return;
         }
-
         if (!title || !content) {
             setError("Title and content are required");
             return;
         }
-
         setLoading(true);
         try {
             if (isEditing && noteId) {
@@ -80,7 +76,7 @@ export default function MainPage() {
                     { title, content },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
-                setNotes((prev) => [...prev, res.data]);
+                setNotes((prev) => [res.data, ...prev]);
             }
             setShowPopup(false);
             setTitle("");
@@ -115,24 +111,19 @@ export default function MainPage() {
 
     return(
         <div className="min-h-screen bg-slate-900 text-slate-100">
-            {/* NavBar */}
             <div className="flex items-center p-4 justify-between bg-slate-800 border-b border-slate-700">
-                {/* Left Side */}
                 <div className="flex items-center gap-2">
                     <img className="w-10 h-10" src={logo1} alt="App-Icon" />
                     <span className="font-bold ml-2 text-2xl text-slate-100">Notes</span>
                 </div>
-                {/* Right Side */}
                 <div className="flex items-center gap-4">
                     <button onClick={() => setShowPopup(true)} className="rounded-md p-1 hover:bg-slate-700/30"><img className="w-6.5 h-6.5" src={logo2} alt="Add" /></button>
                     <button onClick={logout} className="px-3 py-1.5 border border-slate-700 rounded-md hover:bg-slate-700/30">Logout</button>
                 </div>
             </div>
-            { /* name of user */}
             <div className="p-4 border-b border-slate-700 flex items-center justify-center">
                 <h2 className="text-lg">Hi, <span className="font-semibold text-slate-200">{username}!</span></h2>
             </div>
-            {/* Popup form */}
             { showPopup &&
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
                 <form onSubmit={handleSubmit} className="fixed w-96 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-slate-800 border border-slate-700 px-6 py-6 rounded-lg">
@@ -150,7 +141,6 @@ export default function MainPage() {
                 </form>
             </div>
             }
-            { /* Main Content */}
             <main>
                 { notes.length === 0 ? (
                     <div className="flex flex-col items-center justify-center mt-20">
