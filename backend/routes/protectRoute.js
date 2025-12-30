@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/", authMiddleware, async (req, res) => {
     try {
-        const notes = await Note.find({ userId: req.user._id }).sort({ createdAt: -1 });
+        const notes = await Note.find({ userId: req.user._id });
         res.status(200).json(notes);
     } catch (error) {
         res.status(500).json({ message: "Internal server error" });
