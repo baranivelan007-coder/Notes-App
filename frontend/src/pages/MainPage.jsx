@@ -123,11 +123,14 @@ export default function MainPage() {
                     <span className="font-bold ml-2 text-2xl text-slate-100">Notes</span>
                 </div>
                 {/* Right Side */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                     <button onClick={() => setShowPopup(true)} className="rounded-md p-1 hover:bg-slate-700/30"><img className="w-6.5 h-6.5" src={logo2} alt="Add" /></button>
-                    { username && <span className="text-slate-300">Hello, {username}</span> }
                     <button onClick={logout} className="px-3 py-1.5 border border-slate-700 rounded-md hover:bg-slate-700/30">Logout</button>
                 </div>
+            </div>
+            { /* name of user */}
+            <div className="p-4 border-b border-slate-700">
+                <h2 className="text-lg">Welcome, <span className="font-semibold text-slate-200">{username}</span></h2>
             </div>
             {/* Popup form */}
             { showPopup &&
