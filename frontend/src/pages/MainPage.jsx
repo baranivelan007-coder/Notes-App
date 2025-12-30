@@ -111,7 +111,7 @@ export default function MainPage() {
 
     return(
         <div className="min-h-screen bg-slate-900 text-slate-100">
-            <div className="fixed top-0 left-0 right-0 flex items-center p-4 justify-between bg-slate-800 border-b border-slate-700">
+            <div className="flex items-center p-4 justify-between bg-slate-800 border-b border-slate-700">
                 <div className="flex items-center gap-2">
                     <img className="w-10 h-10" src={logo1} alt="App-Icon" />
                     <span className="font-bold ml-2 text-2xl text-slate-100">Notes</span>
