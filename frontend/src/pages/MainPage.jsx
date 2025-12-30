@@ -130,7 +130,7 @@ export default function MainPage() {
             </div>
             { /* name of user */}
             <div className="p-4 border-b border-slate-700 align-center">
-                <h2 className="text-lg">Welcome, <span className="font-semibold text-slate-200">{username}</span></h2>
+                <h2 className="text-lg">Hi, <span className="font-semibold text-slate-200">{username}!</span></h2>
             </div>
             {/* Popup form */}
             { showPopup &&

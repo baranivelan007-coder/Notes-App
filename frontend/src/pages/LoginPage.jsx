@@ -73,8 +73,6 @@ export default function LoginPage() {
           </motion.button>
         </form>
 
-        <p className="text-sm text-slate-400 text-center mt-4 cursor-pointer hover:underline">Forgot Password?</p>
-
         <p className="text-sm text-slate-400 text-center mt-6">
           Don’t have an account?{' '}
           <span onClick={() => navigate('/signup')} className="text-slate-200 cursor-pointer hover:underline">
