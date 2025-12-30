@@ -35,7 +35,7 @@ export default function MainPage() {
 
             setLoading(true);
             try {
-                const res = await axios.get("http://localhost:5000/notes", {
+                const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notes`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setNotes(res.data || []);
@@ -67,7 +67,7 @@ export default function MainPage() {
         try {
             if (isEditing && noteId) {
                 const res = await axios.put(
-                    `http://localhost:5000/notes/${noteId}`,
+                    `${import.meta.env.VITE_BACKEND_URL}/notes/${noteId}`,
                     { title, content },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -76,7 +76,7 @@ export default function MainPage() {
                 setNoteId(null);
             } else {
                 const res = await axios.post(
-                    "http://localhost:5000/notes",
+                    `${import.meta.env.VITE_BACKEND_URL}/notes`,
                     { title, content },
                     { headers: { Authorization: `Bearer ${token}` } }
                 );
@@ -96,7 +96,7 @@ export default function MainPage() {
         const token = localStorage.getItem("token");
         if (!token) return navigate("/login");
         try {
-            await axios.delete(`http://localhost:5000/notes/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/notes/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setNotes((prev) => prev.filter((n) => n._id !== id));

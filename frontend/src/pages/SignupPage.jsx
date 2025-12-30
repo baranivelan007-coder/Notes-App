@@ -23,7 +23,7 @@ export default function SignupPage() {
     } 
 
     try {
-      const res = await axios.post("http://localhost:5000/register", { username, email, password });
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register`, { username, email, password });
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Signup failed");
