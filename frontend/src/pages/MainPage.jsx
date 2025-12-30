@@ -93,6 +93,7 @@ export default function MainPage() {
     };
 
     const deleteNote = async (id) => {
+        setLoading(true);
         const token = localStorage.getItem("token");
         if (!token) return navigate("/login");
         try {
@@ -102,6 +103,8 @@ export default function MainPage() {
             setNotes((prev) => prev.filter((n) => n._id !== id));
         } catch (err) {
             setError("Failed to delete note");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -165,7 +168,7 @@ export default function MainPage() {
                                 <p className="text-slate-300 mt-2">{note.content}</p>
                                 <p className="text-slate-400 text-sm mt-4">{new Date(note.date).toLocaleDateString()}</p>
                                 <button onClick={() => startEdit(note)} className="mt-2 px-3 py-1 border border-slate-600 text-slate-100 rounded-md hover:bg-slate-700/30">Edit</button>
-                                <button onClick={() => deleteNote(note._id)} className="ml-2 mt-2 px-3 py-1 border border-rose-600 text-rose-400 rounded-md hover:bg-rose-700/10">Delete</button>
+                                <button onClick={() => deleteNote(note._id)} className="ml-2 mt-2 px-3 py-1 border border-rose-600 text-rose-400 rounded-md hover:bg-rose-700/10">{loading ? "Deleting..." : "Delete"}</button>
                             </div>
                         ))}
                     </div>
