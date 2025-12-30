@@ -8,7 +8,26 @@ connectDB();
 
 const app = express();
 app.use(express.json());
-app.use(cors({ origin: process.env.FRONTEND_URL || 'http://localhost:5173', credentials: true }));
+
+const defaultOrigins = [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000'
+];
+const envOrigins = (process.env.FRONTEND_URLS || process.env.FRONTEND_URL || '').split(',').map(s => s.trim()).filter(Boolean);
+const allowedOrigins = Array.from(new Set([...envOrigins, ...defaultOrigins]));
+
+app.use(cors({
+    origin: function(origin, callback){
+        if(!origin) return callback(null, true);
+        if(allowedOrigins.indexOf(origin) !== -1){
+            return callback(null, true);
+        }
+        return callback(new Error('CORS policy: origin not allowed'));
+    },
+    credentials: true,
+}));
 
 app.use("/register", require("./routes/reg"));
 app.use("/login", require("./routes/log"));
