@@ -150,12 +150,16 @@ export default function MainPage() {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                         {notes.map((note) => (
-                            <div key={note._id} className="bg-slate-800 border border-slate-700 rounded-md p-4 max-w-full overflow-hidden">
-                                <h3 className="font-bold text-lg text-slate-100">{note.title}</h3>
-                                <p className="text-slate-300 mt-2 break-words break-all whitespace-pre-wrap">{note.content}</p>
-                                <p className="text-slate-400 text-sm mt-4">{note.date ? new Date(note.date).toLocaleDateString() : '—'}</p>
-                                <button onClick={() => startEdit(note)} className="mt-2 px-3 py-1 border border-slate-600 text-slate-100 rounded-md hover:bg-slate-700/30">Edit</button>
-                                <button onClick={() => deleteNote(note._id)} className="ml-2 mt-2 px-3 py-1 border border-rose-600 text-rose-400 rounded-md hover:bg-rose-700/10">Delete</button>
+                            <div key={note._id} className="bg-slate-800 border border-slate-700 rounded-md p-4 max-w-full overflow-hidden flex flex-col justify-between h-full">
+                                <div className="overflow-hidden">
+                                    <h3 className="font-bold text-lg text-slate-100 truncate">{note.title}</h3>
+                                    <p className="text-slate-300 mt-2 break-words whitespace-pre-wrap max-h-40 overflow-auto">{note.content}</p>
+                                    <p className="text-slate-400 text-sm mt-4">{note.date ? new Date(note.date).toLocaleDateString() : '—'}</p>
+                                </div>
+                                <div className="mt-4 flex gap-2 justify-end flex-shrink-0">
+                                    <button onClick={() => startEdit(note)} className="px-3 py-1 border border-slate-600 text-slate-100 rounded-md hover:bg-slate-700/30">Edit</button>
+                                    <button onClick={() => deleteNote(note._id)} className="px-3 py-1 border border-rose-600 text-rose-400 rounded-md hover:bg-rose-700/10">Delete</button>
+                                </div>
                             </div>
                         ))}
                     </div>
