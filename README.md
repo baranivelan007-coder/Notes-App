@@ -38,3 +38,4 @@ This project was built to:
 
 ## 🔗 Live Demo
 
+notes-app-frontend-blue.vercel.app
